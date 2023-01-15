@@ -5,6 +5,6 @@ namespace AuthenticatorPro.Shared.Data
 {
     public enum SortMode
     {
-        AlphabeticalAscending, AlphabeticalDescending, Custom
+        AlphabeticalAscending, AlphabeticalDescending, CopyCountDescending, CopyCountAscending, Custom
     }
 }

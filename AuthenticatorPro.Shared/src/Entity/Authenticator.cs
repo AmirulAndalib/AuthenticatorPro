@@ -47,6 +47,8 @@ namespace AuthenticatorPro.Shared.Entity
 
         [Column("ranking")] public int Ranking { get; set; }
 
+        [Column("copyCount")] public int CopyCount { get; set; }
+
 
         private IGenerator _generator;
         private long _lastCounter;

@@ -55,7 +55,7 @@ namespace AuthenticatorPro.WearOS.Data
 
             var isEqual = !differentCategories && x.Type == y.Type && x.Secret == y.Secret && x.Icon == y.Icon &&
                           x.Issuer == y.Issuer && x.Username == y.Username && x.Period == y.Period &&
-                          x.Digits == y.Digits && x.Algorithm == y.Algorithm && x.Pin == y.Pin;
+                          x.Digits == y.Digits && x.Algorithm == y.Algorithm && x.Pin == y.Pin && x.CopyCount == y.CopyCount;
 
             return isEqual;
         }
@@ -72,6 +72,7 @@ namespace AuthenticatorPro.WearOS.Data
             hash.Add(obj.Period);
             hash.Add(obj.Digits);
             hash.Add(obj.Algorithm);
+            hash.Add(obj.CopyCount);
             hash.Add(obj.Categories);
 
             return hash.ToHashCode();

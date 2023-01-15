@@ -187,5 +187,11 @@ namespace AuthenticatorPro.Shared.Service.Impl
             auth.Counter++;
             await _authenticatorRepository.UpdateAsync(auth);
         }
+
+        public async Task IncrementCopyCountAsync(Authenticator auth)
+        {
+            auth.CopyCount++;
+            await _authenticatorRepository.UpdateAsync(auth);
+        }
     }
 }

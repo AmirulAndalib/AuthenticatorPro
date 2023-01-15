@@ -465,6 +465,8 @@ namespace AuthenticatorPro.Droid.Activity
             {
                 SortMode.AlphabeticalAscending => Resource.Id.actionSortAZ,
                 SortMode.AlphabeticalDescending => Resource.Id.actionSortZA,
+                SortMode.CopyCountDescending => Resource.Id.actionSortMostCopied,
+                SortMode.CopyCountAscending => Resource.Id.actionSortLeastCopied,
                 _ => Resource.Id.actionSortCustom
             };
 
@@ -484,6 +486,14 @@ namespace AuthenticatorPro.Droid.Activity
 
                 case Resource.Id.actionSortZA:
                     sortMode = SortMode.AlphabeticalDescending;
+                    break;
+
+                case Resource.Id.actionSortMostCopied:
+                    sortMode = SortMode.CopyCountDescending;
+                    break;
+
+                case Resource.Id.actionSortLeastCopied:
+                    sortMode = SortMode.CopyCountAscending;
                     break;
 
                 case Resource.Id.actionSortCustom:
@@ -994,14 +1004,16 @@ namespace AuthenticatorPro.Droid.Activity
             _appBarLayout.SetExpanded(true);
         }
 
-        private void OnAuthenticatorClicked(object sender, int position)
+        private async void OnAuthenticatorClicked(object sender, int position)
         {
             var auth = _authenticatorView[position];
+
             var clipboard = (ClipboardManager) GetSystemService(ClipboardService);
             var clip = ClipData.NewPlainText("code", auth.GetCode());
             clipboard.PrimaryClip = clip;
 
             ShowSnackbar(Resource.String.copiedToClipboard, Snackbar.LengthShort);
+            await _authenticatorService.IncrementCopyCountAsync(auth);
         }
 
         private void OnAuthenticatorMenuClicked(object sender, int position)
